@@ -21,10 +21,10 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install dependencies
+    - name: Install system dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential zlib1g-dev openjdk-8-jdk
+        sudo apt-get install -y build-essential zlib1g-dev openjdk-8-jdk python3-distutils
         pip install buildozer cython
 
     - name: Build APK
@@ -33,7 +33,7 @@ jobs:
         buildozer -v android debug
 
     - name: Upload APK
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v2
       with:
         name: app-debug.apk
         path: bin/*.apk
