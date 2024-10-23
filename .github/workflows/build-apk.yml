@@ -48,7 +48,7 @@ jobs:
     - name: Accept SDK Licenses
       run: |
         yes | $HOME/android-sdk/tools/bin/sdkmanager --licenses
-        yes | $HOME/android-sdk/tools/bin/sdkmanager "build-tools;30.0.3" "platforms;android-31" "platform-tools"
+        yes | $HOME/android-sdk/tools/bin/sdkmanager "build-tools;35.0.0" "platforms;android-31" "platform-tools"
 
     - name: Build APK
       run: |
