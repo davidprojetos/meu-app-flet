@@ -27,6 +27,11 @@ jobs:
         sudo apt-get install -y build-essential zlib1g-dev openjdk-8-jdk python3-distutils
         pip install buildozer cython
 
+    - name: Install Android SDK
+      run: |
+        yes | sdkmanager --licenses || true  # Aceitar todas as licenças
+        sdkmanager "build-tools;35.0.0" "platforms;android-31" "platform-tools"
+
     - name: Build APK
       run: |
         buildozer init
