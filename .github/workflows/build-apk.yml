@@ -33,22 +33,22 @@ jobs:
         mkdir -p $HOME/android-sdk
         unzip android-sdk.zip -d $HOME/android-sdk
         rm android-sdk.zip
-        
+
         # Configura as variáveis de ambiente
         echo "export ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
         echo "export PATH=\$PATH:\$ANDROID_HOME/tools:\$ANDROID_HOME/platform-tools" >> $GITHUB_ENV
 
     - name: Accept SDK Licenses
       run: |
+        echo "Aceitando licenças do SDK..."
         yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
         yes | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;35.0.0" "platforms;android-31" "platform-tools"
 
     - name: Build APK
       run: |
+        echo "Construindo o APK..."
         # Comando para compilar seu APK
-        # Aqui, substitua por seu comando de compilação
-        # Por exemplo, se você tiver um script ou comando específico
-        ./gradlew assembleDebug # ou qualquer comando que você utilize para build
+        ./gradlew assembleDebug # ajuste conforme necessário
 
     - name: Upload APK
       uses: actions/upload-artifact@v3
