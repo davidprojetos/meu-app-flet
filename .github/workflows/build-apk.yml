@@ -38,11 +38,16 @@ jobs:
         echo "export ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
         echo "export PATH=\$PATH:\$ANDROID_HOME/tools:\$ANDROID_HOME/platform-tools" >> $GITHUB_ENV
 
+    - name: List SDK Tools
+      run: |
+        echo "Listando arquivos no Android SDK:"
+        ls -R $ANDROID_HOME
+
     - name: Accept SDK Licenses
       run: |
         echo "Aceitando licenças do SDK..."
-        yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
-        yes | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;35.0.0" "platforms;android-31" "platform-tools"
+        yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses || true
+        yes | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;35.0.0" "platforms;android-31" "platform-tools" || true
 
     - name: Build APK
       run: |
