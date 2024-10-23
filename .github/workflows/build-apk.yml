@@ -25,22 +25,22 @@ jobs:
     - name: Install system dependencies
       run: |
         sudo apt-get update
+        sudo apt-get install -y unzip
         sudo apt-get install -y build-essential zlib1g-dev python3-distutils
         pip install buildozer cython
 
     - name: Install Android SDK
       run: |
-        sudo apt-get install -y unzip
         wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -O android-sdk.zip
         unzip android-sdk.zip -d $HOME/android-sdk
         echo "export ANDROID_HOME=$HOME/android-sdk" >> $HOME/.bashrc
         echo "export PATH=\$PATH:\$ANDROID_HOME/tools:\$ANDROID_HOME/tools/bin:\$ANDROID_HOME/platform-tools" >> $HOME/.bashrc
         source $HOME/.bashrc
-        yes | $HOME/android-sdk/tools/bin/sdkmanager --licenses
-        yes | $HOME/android-sdk/tools/bin/sdkmanager "build-tools;30.0.3" "platforms;android-31" "platform-tools"
 
     - name: Accept SDK Licenses
-      run: yes | $HOME/android-sdk/tools/bin/sdkmanager --licenses
+      run: |
+        yes | $HOME/android-sdk/tools/bin/sdkmanager --licenses
+        yes | $HOME/android-sdk/tools/bin/sdkmanager "build-tools;30.0.3" "platforms;android-31" "platform-tools"
 
     - name: Build APK
       run: |
